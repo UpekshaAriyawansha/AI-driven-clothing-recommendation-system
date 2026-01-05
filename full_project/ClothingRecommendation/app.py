@@ -18,7 +18,7 @@ def serve_image(filename):
     return send_from_directory('fashion_previews', filename)
 
 # === Recommendation + Image Generation API ===
-@app.route('/api/recommendation/add', methods=['POST']) 
+@app.route('/api/recommendation/add', methods=['POST'])
 def get_recommendation():
     try:
         user_input = request.json

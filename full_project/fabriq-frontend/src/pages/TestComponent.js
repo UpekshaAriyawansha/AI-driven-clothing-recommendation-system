@@ -1,117 +1,56 @@
-import React, { useState } from "react";
-import { Form, Select, Typography } from "antd";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-const { Option } = Select;
-const { Text } = Typography;
+const TestComponent = () => { 
+  
+const [formData, setFormData] = useState({
+        image: null, skinColor: "", age: "", gender: "", height: "", weight: "", typeOfOccasion: ""
+    });
+    const [recommendations, setRecommendations] = useState(null);
 
-const TestComponent = () => { // Renamed to start with uppercase
-  const [selectedHeight, setSelectedHeight] = useState(null);
-  const [selectedWeight, setSelectedWeight] = useState(null);
-  const [heightCategory, setHeightCategory] = useState("");
-  const [weightCategory, setWeightCategory] = useState("");
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
-  const heightCategories = {
-    below: "Short",
-    "155": "Normal",
-    above: "Tall",
-  };
+    const handleFileChange = (e) => {
+        setFormData({ ...formData, image: e.target.files[0] });
+    };
 
-  const weightOptions = {
-    below: [
-      { value: "below40", label: "Below 40 kg" },
-      { value: "40", label: "40 - 50 kg" },
-      { value: "above50", label: "Above 50 kg" },
-    ],
-    "155": [
-      { value: "below48", label: "Below 48 kg" },
-      { value: "48", label: "48 - 65 kg" },
-      { value: "above65", label: "Above 65 kg" },
-    ],
-    above: [
-      { value: "below55", label: "Below 55 kg" },
-      { value: "55", label: "55 - 75 kg" },
-      { value: "above75", label: "Above 75 kg" },
-    ],
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = new FormData();
+        Object.keys(formData).forEach(key => {
+            data.append(key, formData[key]);
+        });
 
-  const weightCategories = {
-    below40: "Thin",
-    "40": "Normal",
-    above50: "Fat",
-    below48: "Thin",
-    "48": "Normal",
-    above65: "Fat",
-    below55: "Thin",
-    "55": "Normal",
-    above75: "Fat",
-  };
+        const response = await axios.post('http://localhost:5000/recommend', data);
+        setRecommendations(response.data);
+    };
 
-  const handleHeightChange = (value) => {
-    setSelectedHeight(value);
-    setHeightCategory(heightCategories[value] || "");
-    setSelectedWeight(null); // Reset weight when height changes
-    setWeightCategory("");
-  };
+    return (
+        <div className="app">
+            <h1>FABRIQ - AI Fashion Recommendation</h1>
+            <form onSubmit={handleSubmit}>
+                <input type="file" name="image" onChange={handleFileChange} />
+                <input type="text" name="skinColor" placeholder="Skin Color" onChange={handleChange} />
+                <input type="text" name="age" placeholder="Age" onChange={handleChange} />
+                <input type="text" name="gender" placeholder="Gender" onChange={handleChange} />
+                <input type="text" name="height" placeholder="Height" onChange={handleChange} />
+                <input type="text" name="weight" placeholder="Weight" onChange={handleChange} />
+                <input type="text" name="typeOfOccasion" placeholder="Occasion Type" onChange={handleChange} />
+                <button type="submit">Get Recommendation</button>
+            </form>
 
-  const handleWeightChange = (value) => {
-    setSelectedWeight(value);
-    setWeightCategory(weightCategories[value] || "");
-  };
-
-  return (
-    <Form>
-      <Form.Item label="Height">
-        <Select
-          onChange={handleHeightChange}
-          placeholder="Select Height"
-          className="rounded"
-          style={{
-            width: "332px",
-            border: "solid",
-            borderColor: "#ebebe0",
-            borderWidth: "0.1px",
-          }}
-        >
-          <Option value="below">Below 155 cm</Option>
-          <Option value="155">155 - 170 cm</Option>
-          <Option value="above">Above 170 cm</Option>
-        </Select>
-      </Form.Item>
-
-      <Form.Item label="Weight">
-        <Select
-          onChange={handleWeightChange}
-          placeholder="Select Weight"
-          className="rounded"
-          style={{
-            width: "332px",
-            border: "solid",
-            borderColor: "#ebebe0",
-            borderWidth: "0.1px",
-          }}
-          disabled={!selectedHeight}
-        >
-          {selectedHeight &&
-            weightOptions[selectedHeight].map((option) => (
-              <Option key={option.value} value={option.value}>
-                {option.label}
-              </Option>
-            ))}
-        </Select>
-      </Form.Item>
-
-      {/* Display Height and Weight Categories */}
-      <Form.Item>
-        <Text strong>Height Category: </Text>
-        <Text>{heightCategory}</Text>
-      </Form.Item>
-
-      <Form.Item>
-        <Text strong>Weight Category: </Text>
-        <Text>{weightCategory}</Text>
-      </Form.Item>
-    </Form>
-  );
+            {recommendations && (
+                <div>
+                    <h2>Recommendations</h2>
+                    <p>Fabrics: {recommendations.fabrics.join(", ")}</p>
+                    <p>Colors: {recommendations.colors.join(", ")}</p>
+                    <p>Patterns: {recommendations.patterns.join(", ")}</p>
+                </div>
+            )}
+        </div>
+    );
 };
 
-export default TestComponent; // Export correctly
+export default TestComponent; 

@@ -17,4 +17,3 @@ router.post('/add', validateUserPreferences, addUserPreferences);
 router.get('/:id', getUserById);
 
 module.exports = router;
-

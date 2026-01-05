@@ -101,10 +101,10 @@ def build_prompt_full(recommendations, user_input):
     weight = user_input['weight']
 
     prompt = (
-    f"Create a 2D image of a women's {clothing_item} with "
-    f"{fabrics} fabric, {patterns} patterns and {colors} colors. "
-    f"for a {occasion} occasion, on a white background, in 2D clothing item image"
-    f"The person has a {body_shape} body shape, {skin_tone} skin tone, weighs {weight}, and is {height} height."
+    f"Create a 2D digital fashion illustration of a women's {clothing_item} designed with "
+    f"{fabrics} fabric, featuring {patterns} patterns and {colors} colors. "
+    f"Front view for a {occasion} occasion, on a white background, in fashion illustration style. "
+    f"The model has a {body_shape} body shape, {skin_tone} skin tone, weighs {weight}, and is {height} height."
     )
     return prompt
     print(prompt)
