@@ -1,0 +1,113 @@
+@import "./variables";
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.body-background {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  color: $primary-color;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+}
+
+.container-sup {
+  position: relative;
+  z-index: 2;
+}
+
+.brand-dot {
+  width: 10px;
+  height: 10px;
+  background-color: $accent-color;
+  border-radius: 50%;
+}
+
+.feature-card {
+  background-color: $secondary-color;
+  padding: 1.5rem;
+  border-radius: $card-radius;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  h4 {
+    color: $primary-color;
+    font-weight: 600;
+  }
+
+  p {
+    color: $primary-color;
+    opacity: 0.9;
+  }
+}
+
+.btn-custom {
+  border-radius: 50px;
+  font-weight: 600;
+  transition: $transition;
+  box-shadow: $card-shadow;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.4);
+  }
+}
+
+.card-custom {
+  background-color: $bg-dark;
+  border-radius: $card-radius;
+  padding: 1rem;
+  transition: $transition;
+  box-shadow: $card-shadow;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  img {
+    border-radius: 0.5rem;
+    object-fit: cover;
+  }
+}
+
+.modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+  background-color: $bg-dark;
+  color: $primary-color;
+}
+
+.ant-upload-drag-icon {
+  font-size: 38px;
+  color: $primary-color;
+}
+
+.hover-zoom {
+  overflow: hidden;
+
+  img {
+    transition: $transition;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+}

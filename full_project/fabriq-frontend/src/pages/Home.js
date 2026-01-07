@@ -3,45 +3,37 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import background from "../images/background.webp";
+import "../styles/main.scss";
 
 const Home = () => {
   return (
     <>
       <div
-        className="d-flex justify-content-center align-items-center vh-100"
+        className="d-flex justify-content-center align-items-center body-background"
         style={{
+          height: "83.29vh", 
           backgroundImage: `url(${background})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          width: "100vw",
-          height: "100vh",
         }}
       >
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-8 col-lg-6">
-              <div
-                className="card text-center shadow-lg p-5 rounded"
-                style={{
-                  border: "solid 1px #F8F8F8",
-                  backgroundColor: "#E6E0F8",
-                  opacity: 1,
-                }}
-              >
-                <h5 className="fw-bold mt-3">Personalized Garment Suggestions</h5>
-                <h1 className="fw-bold mt-3 mb-3">FABRIQ AI Clothing Recommender</h1>
-                <p>Analyze photos for tailored recommendations</p>
-                <Link
-                  to="/inputs"
-                  className="btn btn-dark btn-lg rounded-pill mt-3 mx-auto"
-                  style={{ border: "solid 1px white", maxWidth: "300px" }}
-                >
-                  Try Now
-                </Link>
-              </div>
-            </div>
-          </div>
+        <div className="background-shadow"/>
+        <div
+          className="container container-sup text-center text-white" >
+          <h5 className="fw-light mb-3" style={{ letterSpacing: "2px" }}>
+            Personalized Fashion Recommendations
+          </h5>
+          <h1 className="display-4 fw-bold mb-4">
+            FABRIQ AI Clothing Recommender
+          </h1>
+          <p className="lead mb-4">
+            Upload your photos and receive AI-driven, tailored clothing suggestions
+            curated just for your style and preferences.
+          </p>
+          <Link
+            to="/recommendation-form"
+            className="btn-custom btn btn-outline-light btn-lg rounded-pill px-5"
+          >
+            Try Now
+          </Link>
         </div>
       </div>
     </>

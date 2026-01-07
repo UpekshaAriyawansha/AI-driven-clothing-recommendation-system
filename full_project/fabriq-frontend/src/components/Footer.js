@@ -1,14 +1,13 @@
-const Footer = () => {
-    return(
-      <>
-        <footer className="text-center text-lg-start bg-body-tertiary text-muted fixed-bottom">
-          <div className="text-center p-4" style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}>
-            © 2024 Copyright: 
-            <a className="text-reset text-decoration-none" href="https://www.wlv.ac.uk/"> university of wolverhampton </a>
-          </div>
-        </footer>
+import React from "react";
 
-      </>
-    )
-    }
-    export default Footer    
+const Footer = () => {
+  return (
+    <footer className="bg-dark text-light py-3 mt-auto">
+      <div className="container text-center">
+        <p className="mb-1">&copy; {new Date().getFullYear()} FABRIQ AI. All rights reserved.</p>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

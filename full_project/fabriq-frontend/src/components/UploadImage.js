@@ -1,16 +1,16 @@
-import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { Upload, message } from 'antd';
-import { InboxOutlined } from '@ant-design/icons';
-import * as tmImage from '@teachablemachine/image';
+// src/components/UploadImage.js
+import React, { useRef } from "react";
+import { Upload, message } from "antd";
+import { InboxOutlined } from "@ant-design/icons";
+import * as tmImage from "@teachablemachine/image";
+import "../styles/main.scss";
 
 const { Dragger } = Upload;
 
 const modelURL = "https://teachablemachine.withgoogle.com/models/RJdWfGNCv/model.json";
 const metadataURL = "https://teachablemachine.withgoogle.com/models/RJdWfGNCv/metadata.json";
 
-const UploadImage = () => {
-  const [bodyShape, setBodyShape] = useState("");
+const UploadImage = ({ onDetect }) => {
   const modelRef = useRef(null);
 
   const loadModel = async () => {
@@ -19,60 +19,36 @@ const UploadImage = () => {
     }
   };
 
-  const classifyImage = async (imgElement) => {
+  const classifyImage = async (img) => {
     await loadModel();
-    const prediction = await modelRef.current.predict(imgElement);
-    const topPrediction = prediction.reduce((prev, current) =>
-      prev.probability > current.probability ? prev : current
-    );
-    setBodyShape(topPrediction.className);
-    message.success(`Predicted Body Shape: ${topPrediction.className}`);
+    const prediction = await modelRef.current.predict(img);
+    const top = prediction.reduce((a, b) => (a.probability > b.probability ? a : b));
+    message.success(`Body Shape Detected: ${top.className}`);
+    onDetect(top.className);
   };
 
-  const props = {
-    name: 'image',
-    multiple: false,
-    accept: 'image/*',
-    showUploadList: false,
+  const uploadProps = {
     beforeUpload(file) {
       const reader = new FileReader();
-      reader.onload = async (e) => {
+      reader.onload = (e) => {
         const img = new Image();
         img.src = e.target.result;
-        img.onload = () => {
-          classifyImage(img);
-        };
+        img.onload = () => classifyImage(img);
       };
       reader.readAsDataURL(file);
-      return false;
+      return false; 
     },
+    accept: "image/*",
+    maxCount: 1,
   };
 
   return (
-    <>
-      <Dragger {...props}>
-        <p className="ant-upload-drag-icon">
-          <InboxOutlined />
-        </p>
-        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-        <p className="ant-upload-hint">
-          Upload your full body photo to detect your body shape
-        </p>
-      </Dragger>
-
-      {bodyShape && (
-        <div className="text-center mt-4">
-          <h3>Detected Body Shape: <strong>{bodyShape}</strong></h3>
-          {/* <Link
-            to={`/recform?shape=${encodeURIComponent(bodyShape)}`}
-            className="btn btn-dark btn-lg rounded mt-3"
-            style={{ maxWidth: "300px" }}
-          >
-            Get Recommendations
-          </Link> */}
-        </div>
-      )}
-    </>
+    <Dragger {...uploadProps} className="mb-3 upload-dragger">
+      <p>
+        <InboxOutlined className="ant-upload-drag-icon"/>
+      </p>
+      <p className="ant-upload-text text-white">Upload full body image to detect body shape</p>
+    </Dragger>
   );
 };
 

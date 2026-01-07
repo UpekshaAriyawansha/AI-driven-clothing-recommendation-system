@@ -1,40 +1,57 @@
 import React from "react";
-import logo from "../images/logo.png"
+import { Link } from "react-router-dom";
+import "../styles/main.scss";
+
 
 const Header = () => {
   return (
-    <>
-      <nav class="navbar navbar-expand-lg fixed-top shadow-sm" style={{backgroundColor:"#ffffff"}}>
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img
-              src={logo}
-              alt="Logo"
-              width="50"
-              height="50"
-              className="d-inline-block align-text-top mx-4"
-            />
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end mx-4" id="navbarScroll">
-            <ul class="navbar-nav" style={{ "--bs-scroll-height": "900px" }}>
-              <li class="nav-item">
-                <a class="nav-link fw-bold" href="#">User Guide</a>
-              </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link fw-bold" href="#">About</a>
-              </li>
-            </ul>      
-          </div>
+    <header className="navbar navbar-expand-lg navbar-dark bg-dark py-2 shadow-sm">
+      <div className="container">
+        {/* Brand */}
+        <Link className="navbar-brand fw-bold fs-4 d-flex align-items-center gap-2" to="/">
+          <span className="brand-dot"></span>
+          FABRIQ<span className="text-warning">.</span>
+        </Link>
+
+
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <Link className="nav-link" to="/recommendation-form">
+                Try Now
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/guide">
+                Guide
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/about">
+                About
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/contact">
+                Contact
+              </Link>
+            </li>
+          </ul>
         </div>
-      </nav>
-
-
-
-
-    </>
+      </div>
+    </header>
   );
 };
 

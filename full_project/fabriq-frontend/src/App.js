@@ -1,42 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
-
-import React, { useState } from 'react'
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import Inputs from './pages/Inputs';
-import Recommendations from './pages/Recommendations';
 import About from './pages/About';
 import Guide from './pages/Guide';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import TestComponent from './pages/TestComponent';
-
+import './App.css';
+import Contact from './pages/Contact';
+import RecommendationForm from './pages/RecommendationForm';
 
 function App() {
   return (
-<>
-      <Header/>
-        <div className='app'>
-          <BrowserRouter>
-            <Routes>
-              <Route path='/' element={<Home/>}/>
-              <Route index element={<Home/>}/>
-              <Route path='about' element={<About/>}/>
-              <Route path='guide' element={<Guide/>}/>
-              <Route path='inputs' element={<Inputs/>}/>
-              <Route path='recommendations' element={<Recommendations/>}/>
-<Route path='test' element={<TestComponent/>}/>
-
-            </Routes>
-          </BrowserRouter>
-        </div>
-      <Footer/>  
-</>
-    
-  )
+    <BrowserRouter>
+      <Header />
+      <div className="app">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="guide" element={<Guide />} />
+          <Route path="contact" element={<Contact/>} />
+          <Route path="recommendation-form" element={<RecommendationForm />} />
+        </Routes>
+      </div>
+      <Footer />
+    </BrowserRouter>
+  );
 }
 
-export default App
-
-
+export default App;
