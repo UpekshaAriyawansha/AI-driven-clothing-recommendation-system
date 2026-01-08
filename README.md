@@ -1,7 +1,5 @@
 # AI-Driven Clothing Recommendation System
 
-# FabriQ AI Clothing Recommender
-
 An AI-powered clothing recommendation system that suggests outfits based on user preferences and contextual features using machine learning and deep learning techniques. This project combines a frontend, backend, and ML models to deliver personalized style suggestions.
 
 ---
