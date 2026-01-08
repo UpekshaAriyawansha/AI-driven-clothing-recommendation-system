@@ -11,7 +11,7 @@ FabriQ is designed to help users find clothing recommendations that match their 
 This repository contains:
 - Frontend UI (React)
 - Backend Server (Node/Nextjs)
-- AI Model Integration  (Python / Flask)
+- AI Model Integration  (Python)
 - Database support (Mongodb)
 
 The project is intended as a final-year academic project with practical real-world usefulness.
