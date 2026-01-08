@@ -6,7 +6,7 @@ An AI-powered clothing recommendation system that suggests outfits based on user
 
 ## Project Overview
 
-FabriQ is designed to help users find clothing recommendations that match their style, body shape, skin tone, age, gender and occasion. The system leverages image data and user preferences to provide accurate fashion suggestions.
+FabriQ is designed to help users find clothing recommendations that match their style, body shape, skin tone, age, gender, weight, height and occasion. The system leverages image data and user preferences to provide accurate fashion suggestions.
 
 This repository contains:
 - Frontend UI (React)
@@ -20,7 +20,8 @@ The project is intended as a final-year academic project with practical real-wor
 
 ## Key Features
 
-✔️ Input user attributes (body shape, preferences)  
+✔️ Body shape generated from your image
+✔️ Input user attributes (body shape, skin tone, age, gender, weight, height and occasion)  
 ✔️ Suggest suitable outfits and styles  
 ✔️ Visual UI for browsing recommendations  
 ✔️ REST API for ML inference  
