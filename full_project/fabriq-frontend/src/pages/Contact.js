@@ -108,7 +108,7 @@ const Contact = () => {
                       rel="noreferrer"
                       className="text-light text-decoration-none me-2"
                     >
-                      Instagram
+                      Instagram   
                     </a>
                     <a
                       href="https://www.twitter.com"
